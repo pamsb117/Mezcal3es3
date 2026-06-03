@@ -1,0 +1,1492 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Tours de mezcal artesanal en Santiago Matatlán, Oaxaca. Vive el proceso del agave al mezcal con maestros mezcaleros locales.">
+<title>3 Para el ES3 — Tours de Mezcal Artesanal</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Barlow+Condensed:wght@300;400;500;600;700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ── Reset & Tokens ───────────────────────────────────────────────────────── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --negro:  #080706;
+  --humo:   #111009;
+  --carbon: #1c1a15;
+  --carbon2:#252218;
+  --oro:    #c9922a;
+  --oro2:   #e8b84b;
+  --agave:  #3d6b4a;
+  --agave2: #548f64;
+  --tierra: #7a4f2e;
+  --crema:  #f2e8d0;
+  --blanco: #ffffff;
+  --gris:   #8a8070;
+  --gris2:  #5a5448;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--negro);
+  color: var(--crema);
+  font-family: 'Barlow', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ── Custom cursor ────────────────────────────────────────────────────────── */
+.cursor {
+  position: fixed;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--oro);
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s, width 0.3s, height 0.3s, background 0.3s;
+  mix-blend-mode: difference;
+}
+.cursor-ring {
+  position: fixed;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--oro);
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: all 0.15s ease;
+  opacity: 0.5;
+}
+body:hover .cursor { opacity: 1; }
+
+/* ── Grain overlay ────────────────────────────────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.028;
+  pointer-events: none;
+  z-index: 9000;
+}
+
+/* ── Nav ──────────────────────────────────────────────────────────────────── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  padding: 1.5rem 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background 0.4s, padding 0.4s;
+}
+nav.scrolled {
+  background: rgba(8,7,6,0.92);
+  backdrop-filter: blur(12px);
+  padding: 1rem 3rem;
+  border-bottom: 1px solid rgba(201,146,42,0.15);
+}
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--blanco);
+}
+.nav-logo span { color: var(--oro); }
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+}
+.nav-links a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gris);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--oro); }
+.nav-cta {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--negro);
+  background: var(--oro);
+  padding: 0.6rem 1.4rem;
+  text-decoration: none;
+  transition: background 0.3s, transform 0.2s;
+}
+.nav-cta:hover { background: var(--oro2); transform: translateY(-1px); }
+
+/* ── Hero ─────────────────────────────────────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  padding: 0 2rem;
+
+  background:
+    linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.70)),
+    url('img/hero.png');
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* Smoke bg */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.15);
+}
+
+/* Gold vertical left bar */
+.hero::after {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: linear-gradient(to bottom, transparent, var(--oro) 30%, var(--oro) 70%, transparent);
+}
+
+.hero-eyebrow {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--oro);
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: fadeUp 1s 0.3s forwards;
+}
+
+.hero-big {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(1rem, 4vw, 1.4rem);
+  font-weight: 300;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--gris);
+  opacity: 0;
+  animation: fadeUp 1s 0.5s forwards;
+}
+
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(5rem, 18vw, 14rem);
+  font-weight: 700;
+  line-height: 0.85;
+  color: var(--blanco);
+  letter-spacing: -0.02em;
+  position: relative;
+  opacity: 0;
+  animation: fadeUp 1s 0.7s forwards;
+}
+.hero-title .es { color: var(--oro); }
+.hero-title .num {
+  font-size: 0.65em;
+  vertical-align: super;
+  color: var(--oro2);
+  font-weight: 300;
+}
+
+.hero-divider {
+  width: 120px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--oro), transparent);
+  margin: 2rem auto;
+  opacity: 0;
+  animation: fadeUp 1s 0.9s forwards;
+}
+
+.hero-tagline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+  font-style: italic;
+  color: rgba(242,232,208,0.75);
+  max-width: 600px;
+  line-height: 1.6;
+  opacity: 0;
+  animation: fadeUp 1s 1.1s forwards;
+}
+
+.hero-location {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gris2);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  opacity: 0;
+  animation: fadeUp 1s 1.4s forwards;
+}
+.hero-location::before,
+.hero-location::after {
+  content: '';
+  width: 40px; height: 1px;
+  background: var(--gris2);
+}
+
+/* scroll indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 2.5rem;
+  right: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 0;
+  animation: fadeUp 1s 1.6s forwards;
+}
+.scroll-indicator span {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gris2);
+  writing-mode: vertical-rl;
+}
+.scroll-line {
+  width: 1px; height: 50px;
+  background: linear-gradient(to bottom, var(--gris2), transparent);
+  animation: scrollPulse 2s infinite;
+}
+
+/* ── Sections common ──────────────────────────────────────────────────────── */
+section { padding: 8rem 0; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 3rem; }
+
+.section-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--oro);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, var(--gris2), transparent);
+  max-width: 80px;
+}
+
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 600;
+  line-height: 1;
+  margin-bottom: 1.5rem;
+}
+
+/* reveal animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Propuesta section ────────────────────────────────────────────────────── */
+.propuesta {
+  background: var(--humo);
+  position: relative;
+  overflow: hidden;
+}
+.propuesta::before {
+  content: '"';
+  position: absolute;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 40rem;
+  line-height: 1;
+  color: rgba(201,146,42,0.03);
+  top: -8rem; right: -5rem;
+  pointer-events: none;
+}
+.propuesta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+.propuesta-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.4rem, 3vw, 2.1rem);
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--crema);
+  border-left: 2px solid var(--oro);
+  padding-left: 2rem;
+}
+.propuesta-pillars {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.pillar {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 1rem 1.5rem;
+  background: rgba(201,146,42,0.05);
+  border: 1px solid rgba(201,146,42,0.12);
+  transition: background 0.3s, border-color 0.3s;
+}
+.pillar:hover {
+  background: rgba(201,146,42,0.1);
+  border-color: rgba(201,146,42,0.3);
+}
+.pillar-icon { font-size: 1.5rem; flex-shrink: 0; }
+.pillar-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--oro);
+  font-weight: 500;
+}
+.pillar-desc {
+  font-size: 0.85rem;
+  color: var(--gris);
+  line-height: 1.5;
+}
+
+/* ── Recorrido ────────────────────────────────────────────────────────────── */
+.recorrido { background: var(--negro); }
+.recorrido-intro {
+  max-width: 520px;
+  color: rgba(242,232,208,0.72);
+  line-height: 1.7;
+  margin-top: 1rem;
+}
+.steps-track {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 2rem;
+  margin-top: 4rem;
+  position: relative;
+}
+.steps-track::before {
+  content: '';
+  position: absolute;
+  top: 105px;
+  left: 5%; right: 5%;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--oro), var(--agave), var(--oro), transparent);
+  opacity: 0.9;
+}
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  cursor: default;
+  position: relative;
+  z-index: 1;
+}
+.step-photo {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  border: 1px solid rgba(201,146,42,0.85);
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0)),
+    var(--carbon);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-bottom: 1.2rem;
+  position: relative;
+  box-shadow: inset 0 0 35px rgba(0,0,0,0.45);
+  transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+.step-photo::before {
+  content: 'TU IMAGEN\A AQUÍ';
+  white-space: pre;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  line-height: 1.35;
+  color: rgba(242,232,208,0.32);
+}
+.step-photo::after {
+  content: '▴';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -105%);
+  font-size: 2.3rem;
+  color: rgba(242,232,208,0.22);
+}
+.step-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.step-photo:has(img)::before,
+.step-photo:has(img)::after { display: none; }
+.step:hover .step-photo {
+  transform: translateY(-6px);
+  border-color: var(--oro2);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.35), 0 0 0 1px rgba(232,184,75,0.15);
+}
+.step-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.95rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--oro);
+  font-weight: 600;
+}
+.step-sub {
+  font-size: 0.82rem;
+  color: rgba(242,232,208,0.62);
+  margin-top: 0.55rem;
+  line-height: 1.55;
+}
+
+/* Bottom extras */
+.extras-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  margin-top: 3rem;
+  border: 1px solid var(--carbon2);
+}
+.extra {
+  padding: 2rem 1.5rem;
+  background: var(--carbon);
+  border-right: 1px solid var(--carbon2);
+  transition: background 0.3s;
+}
+.extra:last-child { border-right: none; }
+.extra:hover { background: var(--carbon2); }
+.extra-icon { font-size: 1.8rem; margin-bottom: 0.8rem; }
+.extra-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--oro);
+  margin-bottom: 0.5rem;
+}
+.extra p { font-size: 0.85rem; color: var(--gris); line-height: 1.6; }
+
+/* ── Precios ──────────────────────────────────────────────────────────────── */
+.precios { background: var(--humo); }
+.pricing-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin-top: 4rem;
+}
+.price-card {
+  padding: 3rem 2.5rem;
+  background: var(--carbon);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s;
+}
+.price-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--gris2);
+  transition: background 0.3s, height 0.3s;
+}
+.price-card:hover { transform: translateY(-4px); }
+.price-card:hover::before { background: var(--oro); height: 4px; }
+
+.price-card.premium {
+  background: linear-gradient(135deg, #1a1200 0%, var(--carbon) 60%);
+  border: 1px solid rgba(201,146,42,0.2);
+}
+.price-card.premium::before { background: var(--oro); height: 4px; }
+
+.price-badge {
+  display: inline-block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--negro);
+  background: var(--gris2);
+  padding: 0.25rem 0.75rem;
+  margin-bottom: 1.5rem;
+}
+.price-card.premium .price-badge { background: var(--oro); }
+
+.price-amount {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--blanco);
+  margin-bottom: 0.4rem;
+}
+.price-card.premium .price-amount { color: var(--oro); }
+
+.price-unit {
+  font-size: 0.75rem;
+  color: var(--gris);
+  letter-spacing: 0.1em;
+  margin-bottom: 2rem;
+}
+
+.price-divider {
+  height: 1px;
+  background: linear-gradient(to right, var(--gris2), transparent);
+  margin-bottom: 1.5rem;
+}
+
+.price-features { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
+.price-features li {
+  font-size: 0.88rem;
+  color: var(--crema);
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.price-features li::before {
+  content: '✦';
+  color: var(--gris2);
+  font-size: 0.5rem;
+  flex-shrink: 0;
+}
+.price-card.premium .price-features li::before { color: var(--oro); }
+
+.price-cta {
+  display: inline-block;
+  margin-top: 2.5rem;
+  padding: 0.9rem 2rem;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: transparent;
+  border: 1px solid var(--gris2);
+  color: var(--crema);
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.price-cta:hover { background: var(--gris2); }
+.price-card.premium .price-cta {
+  background: var(--oro);
+  border-color: var(--oro);
+  color: var(--negro);
+  font-weight: 600;
+}
+.price-card.premium .price-cta:hover { background: var(--oro2); }
+
+/* ── Storytelling ─────────────────────────────────────────────────────────── */
+.story { background: var(--negro); position: relative; overflow: hidden; }
+.story-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 50% 80% at 50% 50%, rgba(201,146,42,0.04) 0%, transparent 70%);
+}
+.story-layout {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 6rem;
+  align-items: start;
+}
+.story-left { position: sticky; top: 8rem; }
+.story-left .section-title { font-size: clamp(2rem, 4vw, 3.5rem); }
+.story-pull {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  font-style: italic;
+  color: var(--gris);
+  line-height: 1.7;
+  margin-top: 1.5rem;
+}
+.story-acts { display: flex; flex-direction: column; gap: 0; }
+.story-act {
+  padding: 2.5rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  gap: 1.5rem;
+  align-items: start;
+  transition: background 0.3s;
+}
+.story-act:last-child { border-bottom: none; }
+.act-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3rem;
+  font-weight: 700;
+  color: rgba(201,146,42,0.25);
+  line-height: 1;
+}
+.act-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--oro);
+  margin-bottom: 0.8rem;
+}
+.act-text {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: rgba(242,232,208,0.8);
+}
+
+/* ── Frases creativas ─────────────────────────────────────────────────────── */
+.frases { background: var(--carbon); }
+.frases-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  margin-top: 4rem;
+  background: var(--carbon2);
+  border: 1px solid var(--carbon2);
+}
+.frase-card {
+  background: var(--carbon);
+  padding: 2rem 2.5rem;
+  transition: background 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.frase-card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 2px;
+  background: var(--oro);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.4s ease;
+}
+.frase-card:hover::before { transform: scaleY(1); }
+.frase-card:hover { background: var(--carbon2); }
+.frase-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--crema);
+}
+.frase-tag {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gris2);
+  margin-top: 1rem;
+}
+
+/* ── Parrilla ─────────────────────────────────────────────────────────────── */
+.parrilla { background: var(--negro); }
+.week-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+  background: var(--carbon2);
+  margin-top: 4rem;
+  border: 1px solid var(--carbon2);
+}
+.day-card {
+  background: var(--carbon);
+  padding: 1.5rem 1rem;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  transition: background 0.3s;
+}
+.day-card:hover { background: var(--carbon2); }
+.day-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+  padding-bottom: 0.6rem;
+}
+.day-lun .day-name { color: var(--oro); border-bottom: 1px solid rgba(201,146,42,0.3); }
+.day-mar .day-name { color: var(--agave2); border-bottom: 1px solid rgba(84,143,100,0.3); }
+.day-mie .day-name { color: var(--oro2); border-bottom: 1px solid rgba(232,184,75,0.3); }
+.day-jue .day-name { color: var(--tierra); border-bottom: 1px solid rgba(122,79,46,0.3); }
+.day-vie .day-name { color: var(--oro); border-bottom: 1px solid rgba(201,146,42,0.3); }
+.day-sab .day-name { color: var(--agave2); border-bottom: 1px solid rgba(84,143,100,0.3); }
+.day-dom .day-name { color: var(--oro2); border-bottom: 1px solid rgba(232,184,75,0.3); }
+
+.day-content { font-size: 0.8rem; color: var(--gris); line-height: 1.55; flex: 1; }
+.day-canal {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-top: 1rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  color: var(--gris2);
+}
+
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 2.5rem;
+  opacity: 0;
+  animation: fadeUp 1s 1.25s forwards;
+  position: relative;
+  z-index: 2;
+}
+
+.hero > * {
+  position: relative;
+  z-index: 2;
+}
+
+.testimonios {
+  background: var(--carbon);
+}
+.testimonios-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  margin-top: 4rem;
+  background: var(--carbon2);
+  border: 1px solid var(--carbon2);
+}
+.testimonio-card {
+  background: var(--humo);
+  padding: 2.2rem;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.testimonio-card p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.35rem;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--crema);
+}
+.testimonio-card span {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--oro);
+  margin-top: 1.5rem;
+}
+
+.ubicacion {
+  background: var(--negro);
+}
+.ubicacion-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 3rem;
+  align-items: center;
+}
+.ubicacion p {
+  color: var(--gris);
+  line-height: 1.7;
+  max-width: 440px;
+}
+.map-placeholder {
+  min-height: 360px;
+  border: 1px solid rgba(201,146,42,0.25);
+  background:
+    linear-gradient(rgba(8,7,6,.7), rgba(8,7,6,.7)),
+    radial-gradient(circle at 30% 30%, rgba(201,146,42,.14), transparent 35%),
+    radial-gradient(circle at 70% 70%, rgba(61,107,74,.16), transparent 40%),
+    var(--carbon);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.map-placeholder strong {
+  display: block;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  color: var(--crema);
+  margin-bottom: .5rem;
+}
+.map-placeholder span {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: .75rem;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: var(--oro);
+}
+
+/* ── CTA Banner ───────────────────────────────────────────────────────────── */
+.cta-banner {
+  background: var(--humo);
+  padding: 8rem 0;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+.cta-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 100% at 50% 100%, rgba(201,146,42,0.08) 0%, transparent 70%);
+}
+.cta-banner .section-label { justify-content: center; }
+.cta-banner .section-label::after { display: none; }
+.cta-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem, 7vw, 6rem);
+  font-weight: 700;
+  line-height: 1;
+  margin: 1.5rem 0;
+  color: var(--blanco);
+}
+.cta-title em {
+  font-style: italic;
+  color: var(--oro);
+}
+.cta-sub {
+  font-size: 1rem;
+  color: var(--gris);
+  max-width: 480px;
+  margin: 0 auto 3rem;
+  line-height: 1.7;
+}
+.cta-btns {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.btn-primary {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--negro);
+  background: var(--oro);
+  padding: 1rem 2.5rem;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.3s, transform 0.2s;
+  border: none;
+  cursor: pointer;
+}
+.btn-primary:hover { background: var(--oro2); transform: translateY(-2px); }
+.btn-secondary {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--crema);
+  background: transparent;
+  border: 1px solid var(--gris2);
+  padding: 1rem 2.5rem;
+  text-decoration: none;
+  transition: border-color 0.3s, color 0.3s;
+  cursor: pointer;
+}
+.btn-secondary:hover { border-color: var(--crema); }
+
+/* ── Footer ───────────────────────────────────────────────────────────────── */
+footer {
+  background: var(--negro);
+  padding: 4rem 0 2rem;
+  border-top: 1px solid rgba(201,146,42,0.1);
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 4rem;
+  margin-bottom: 4rem;
+}
+.footer-brand-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+.footer-brand-name span { color: var(--oro); }
+.footer-desc {
+  font-size: 0.88rem;
+  color: var(--gris);
+  line-height: 1.7;
+  max-width: 300px;
+}
+.footer-col h4 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--oro);
+  margin-bottom: 1.5rem;
+}
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
+.footer-col a {
+  font-size: 0.88rem;
+  color: var(--gris);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.footer-col a:hover { color: var(--crema); }
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+.footer-copy {
+  font-size: 0.75rem;
+  color: var(--gris2);
+  letter-spacing: 0.05em;
+}
+.footer-social {
+  display: flex;
+  gap: 1.5rem;
+}
+.footer-social a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gris2);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.footer-social a:hover { color: var(--oro); }
+
+/* ── Campañas ─────────────────────────────────────────────────────────────── */
+.campanas { background: var(--carbon); }
+.campanas-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin-top: 4rem;
+}
+.campana {
+  background: var(--humo);
+  padding: 3rem;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s;
+}
+.campana:hover { transform: translateY(-4px); }
+.campana::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+}
+.campana-1::after { background: var(--oro); }
+.campana-2::after { background: var(--agave); }
+.campana-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 5rem;
+  font-weight: 700;
+  color: rgba(201,146,42,0.1);
+  line-height: 1;
+  position: absolute;
+  right: 2rem; bottom: 1rem;
+}
+.campana-2 .campana-num { color: rgba(61,107,74,0.12); }
+.campana-tag {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--oro);
+  margin-bottom: 0.8rem;
+}
+.campana-2 .campana-tag { color: var(--agave2); }
+.campana-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.campana-slogan {
+  font-size: 0.88rem;
+  font-style: italic;
+  color: var(--gris);
+  margin-bottom: 2rem;
+}
+.campana-items { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
+.campana-items li {
+  font-size: 0.88rem;
+  color: var(--crema);
+  display: flex;
+  gap: 0.8rem;
+  align-items: flex-start;
+  line-height: 1.5;
+}
+.campana-items li::before {
+  content: '✦';
+  color: var(--oro);
+  font-size: 0.5rem;
+  flex-shrink: 0;
+  margin-top: 0.4rem;
+}
+.campana-2 .campana-items li::before { color: var(--agave2); }
+
+/* ── Animations ───────────────────────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes scrollPulse {
+  0%   { transform: scaleY(1); transform-origin: top; opacity: 1; }
+  50%  { transform: scaleY(0.6); opacity: 0.5; }
+  100% { transform: scaleY(1); transform-origin: top; opacity: 1; }
+}
+
+/* ── Responsive ───────────────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  nav { padding: 1.2rem 1.5rem; }
+  nav.scrolled { padding: 0.8rem 1.5rem; }
+  .nav-links, .nav-cta { display: none; }
+  .container { padding: 0 1.5rem; }
+  .propuesta-grid,
+  .pricing-grid,
+  .story-layout,
+  .campanas-grid,
+  .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .steps-track { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+  .steps-track::before { display: none; }
+  .frases-grid { grid-template-columns: 1fr; }
+  .week-grid { grid-template-columns: repeat(2, 1fr); }
+  .extras-grid { grid-template-columns: 1fr; }
+  .testimonios-grid,
+  .ubicacion-grid { grid-template-columns: 1fr; }
+  .hero { background-attachment: scroll; }
+  .hero-title { font-size: clamp(4rem, 20vw, 7rem); }
+  .hero-actions { gap: .7rem; }
+  .story-left { position: relative; top: auto; }
+}
+</style>
+</head>
+<body>
+
+<!-- Custom cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- ── NAV ─────────────────────────────────────────────────────────────────── -->
+<nav id="nav">
+  <div class="nav-logo"><span>3</span> Para el ES3</div>
+  <ul class="nav-links">
+    <li><a href="#recorrido">El Recorrido</a></li>
+    <li><a href="#precios">Precios</a></li>
+    <li><a href="#historia">Nuestra Historia</a></li>
+    <li><a href="#ubicacion">Ubicación</a></li>
+  </ul>
+  <a href="#reservar" class="nav-cta">Reservar ahora</a>
+</nav>
+
+<!-- ── HERO ────────────────────────────────────────────────────────────────── -->
+<section class="hero" id="inicio">
+  <p class="hero-big">Tours de Mezcal Artesanal</p>
+  <div class="hero-eyebrow">Santiago Matatlán · Oaxaca</div>
+  <h1 class="hero-title">
+    <span class="num">3 Para el</span><span class="es">ES</span>3
+  </h1>
+  <div class="hero-divider"></div>
+  <p class="hero-tagline">"No vendemos tours, vendemos viajes<br>al lugar donde la tierra se convierte en espíritu."</p>
+  <div class="hero-actions">
+    <a href="#reservar" class="btn-primary">Reservar experiencia</a>
+    <a href="#recorrido" class="btn-secondary">Ver recorrido</a>
+  </div>
+
+  <div class="scroll-indicator">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ── PROPUESTA ────────────────────────────────────────────────────────────── -->
+<section class="propuesta" id="propuesta">
+  <div class="container">
+    <div class="propuesta-grid">
+      <div class="reveal">
+        <h2 class="section-title">Una experiencia,<br><em style="font-style:italic;color:var(--oro)">no un tour</em></h2>
+        <blockquote class="propuesta-quote">
+          "El verdadero mezcal no vive en los estantes; vive en los palenques, escondido entre caminos de terracería y nubes de incienso."
+        </blockquote>
+      </div>
+      <div class="propuesta-pillars reveal" style="transition-delay:0.2s">
+        <div class="pillar">
+          <div class="pillar-icon">🏺</div>
+          <div>
+            <div class="pillar-name">Autenticidad</div>
+            <div class="pillar-desc">Palenque artesanal real con 4 generaciones de maestros mezcaleros</div>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">🌿</div>
+          <div>
+            <div class="pillar-name">Conexión</div>
+            <div class="pillar-desc">Cultura, tradición y el verdadero sabor del mezcal oaxaqueño</div>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">🔑</div>
+          <div>
+            <div class="pillar-name">Acceso</div>
+            <div class="pillar-desc">Abrimos la puerta de los palenques más auténticos de Oaxaca</div>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">🕕</div>
+          <div>
+            <div class="pillar-name">Horario especial</div>
+            <div class="pillar-desc">Tours disponibles con recorrido guiado por el maestro mezcalero</div>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">💳</div>
+          <div>
+            <div class="pillar-name">Pago fácil</div>
+            <div class="pillar-desc">Terminal bancaria y transferencia electrónica disponibles</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── RECORRIDO ─────────────────────────────────────────────────────────────── -->
+<section class="recorrido" id="recorrido">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">El proceso</div>
+      <h2 class="section-title">Del agave<br>al alma</h2>
+    </div>
+    <div class="steps-track reveal" style="transition-delay:0.3s">
+      <div class="step">
+        <div class="step-photo"><!-- <img src="img/jima.jpg" alt="Jima del agave"> --></div>
+        <div class="step-name">1. Jima</div>
+        <div class="step-sub">Corte del agave maduro en su punto.</div>
+      </div>
+      <div class="step">
+        <div class="step-photo"><!-- <img src="img/coccion.jpg" alt="Cocción del agave"> --></div>
+        <div class="step-name">2. Cocción</div>
+        <div class="step-sub">Horneado en pitones subterráneos.</div>
+      </div>
+      <div class="step">
+        <div class="step-photo"><!-- <img src="img/molienda.jpg" alt="Molienda del agave"> --></div>
+        <div class="step-name">3. Molienda</div>
+        <div class="step-sub">Triturado con tahona tradicional.</div>
+      </div>
+      <div class="step">
+        <div class="step-photo"><!-- <img src="img/fermentacion.jpg" alt="Fermentación del mezcal"> --></div>
+        <div class="step-name">4. Fermentación</div>
+        <div class="step-sub">Transformación natural sin químicos.</div>
+      </div>
+      <div class="step">
+        <div class="step-photo"><!-- <img src="img/destilacion.jpg" alt="Destilación del mezcal"> --></div>
+        <div class="step-name">5. Destilación</div>
+        <div class="step-sub">Destilado en cobre o barro.</div>
+      </div>
+      <div class="step">
+        <div class="step-photo"><!-- <img src="img/cata.jpg" alt="Cata de mezcal"> --></div>
+        <div class="step-name">6. Cata</div>
+        <div class="step-sub">Degustación y brindis con el corazón.</div>
+      </div>
+    </div>
+    <div class="extras-grid reveal" style="transition-delay:0.5s">
+      <div class="extra">
+        <div class="extra-name">Demostración</div>
+        <p>El maestro mezcalero guía cada etapa del proceso, compartiendo generaciones de conocimiento artesanal.</p>
+      </div>
+      <div class="extra">
+        <div class="extra-name">Maridaje local</div>
+        <p>Gastronomía oaxaqueña tradicional seleccionada para complementar las notas de cada varietal.</p>
+      </div>
+      <div class="extra">
+        <div class="extra-name">Fotos del recorrido</div>
+        <p>Instalaciones fotogénicas y momentos auténticos del proceso artesanal para llevar de recuerdo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PRECIOS ────────────────────────────────────────────────────────────────── -->
+<section class="precios" id="precios">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Elige tu experiencia</div>
+      <h2 class="section-title">Dos niveles,<br>un solo palenque</h2>
+    </div>
+    <div class="pricing-grid reveal" style="transition-delay:0.3s">
+      <div class="price-card">
+        <div class="price-badge">Básico</div>
+        <div class="price-amount">$800<span style="font-size:0.5em;font-weight:300"> – $1,000</span></div>
+        <div class="price-unit">MXN por persona</div>
+        <div class="price-divider"></div>
+        <ul class="price-features">
+          <li>Recorrido guiado completo por el palenque</li>
+          <li>Demostración de cada etapa del proceso</li>
+          <li>Cata guiada con el maestro mezcalero</li>
+          <li>Maridaje con gastronomía local</li>
+          <li>Fotos de instalaciones y recorrido</li>
+        </ul>
+        <a href="#reservar" class="price-cta">Reservar tour básico</a>
+      </div>
+      <div class="price-card premium">
+        <div class="price-badge">⭐ Premium</div>
+        <div class="price-amount" style="color:var(--oro)">$1,500<span style="font-size:0.5em;font-weight:300"> – $2,000</span></div>
+        <div class="price-unit">MXN por persona</div>
+        <div class="price-divider" style="background:linear-gradient(to right, var(--oro), transparent)"></div>
+        <ul class="price-features">
+          <li>Todo lo incluido en el tour básico</li>
+          <li>Ritual de bienvenida con copal y música tradicional</li>
+          <li>Degustación privada con el maestro mezcalero</li>
+          <li>Botella personalizada con tu nombre en la etiqueta</li>
+          <li>Reserva 3 personas → el tercero paga solo el 30%</li>
+        </ul>
+        <a href="#reservar" class="price-cta">Reservar tour premium</a>
+      </div>
+    </div>
+    <p class="reveal" style="text-align:center; color:var(--gris); font-size:0.85rem; margin-top:2rem; transition-delay:0.5s">
+      📍 Punto de encuentro: Palenque · Santiago Matatlán, Oaxaca
+    </p>
+  </div>
+</section>
+
+<!-- ── STORYTELLING ───────────────────────────────────────────────────────────── -->
+<section class="story" id="historia">
+  <div class="story-bg"></div>
+  <div class="container" style="position:relative">
+    <div class="story-layout">
+      <div class="story-left reveal">
+        <h2 class="section-title">La puerta<br>abierta al<br><em style="color:var(--oro);font-style:italic">secreto</em></h2>
+        <p class="story-pull">"No te llevamos a ver una exhibición; te llevamos al lugar donde la tierra se convierte en espíritu."</p>
+      </div>
+      <div class="story-acts">
+        <div class="story-act reveal" style="transition-delay:0.1s">
+          <div class="act-num">1</div>
+          <div>
+            <p class="act-text">Cualquiera puede comprar una botella de mezcal en una tienda de regalos o pedir un coctel en un bar. Pero muy pocos saben de dónde viene realmente ese sabor a humo y a tierra. El verdadero mezcal no vive en los estantes.</p>
+          </div>
+        </div>
+        <div class="story-act reveal" style="transition-delay:0.2s">
+          <div class="act-num">2</div>
+          <div>
+            <p class="act-text">Nuestra agencia no vende boletos, vende llaves. Abrimos la puerta de los palenques más auténticos de Oaxaca, lugares donde el tiempo se detiene y donde el maestro mezcalero te recibe como a un viejo amigo.</p>
+          </div>
+        </div>
+        <div class="story-act reveal" style="transition-delay:0.3s">
+          <div class="act-num">3</div>
+          <div>
+            <p class="act-text">Sentirás el calor del horno de piedra, escucharás el rito del mazo golpeando el agave y entenderás por qué el mezcal es la única bebida en el mundo que conserva el alma de quien la hace.</p>
+          </div>
+        </div>
+        <div class="story-act reveal" style="transition-delay:0.4s">
+          <div class="act-num">4</div>
+          <div>
+            <p class="act-text">Al final del tour, ya no verás el mezcal como un simple licor. Lo verás como una herencia. No solo regresas a casa con una botella, regresas con el recuerdo del sol de Oaxaca en la piel.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── TESTIMONIOS ───────────────────────────────────────────────────────────── -->
+<section class="testimonios" id="testimonios">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Experiencia del visitante</div>
+      <h2 class="section-title">Lo que hace<br>especial al tour</h2>
+    </div>
+    <div class="testimonios-grid reveal" style="transition-delay:0.3s">
+      <div class="testimonio-card">
+        <p>"Una experiencia cercana, auténtica y muy diferente a una visita turística común."</p>
+        <span>Visitante del palenque</span>
+      </div>
+      <div class="testimonio-card">
+        <p>"Entender el proceso cambia por completo la forma en la que pruebas el mezcal."</p>
+        <span>Experiencia de cata</span>
+      </div>
+      <div class="testimonio-card">
+        <p>"El contacto con el maestro mezcalero hace que el recorrido se sienta personal y memorable."</p>
+        <span>Tour artesanal</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── UBICACIÓN ─────────────────────────────────────────────────────────────── -->
+<section class="ubicacion" id="ubicacion">
+  <div class="container">
+    <div class="ubicacion-grid">
+      <div class="reveal">
+        <div class="section-label">Ubicación</div>
+        <h2 class="section-title">Santiago<br>Matatlán</h2>
+        <p>El punto de encuentro será confirmado al momento de reservar. Esta sección queda preparada para integrar el mapa exacto del palenque.</p>
+      </div>
+      <div class="map-placeholder reveal" style="transition-delay:0.2s">
+        <div>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3818.2949354006673!2d-96.3758931!3d16.861298599999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85c0cb1ecc2fdaa1%3A0xc33b9d904fbc0a87!2sPalenque%20Gracias%20a%20Dios%20Mezcal!5e0!3m2!1ses-419!2smx!4v1780429233454!5m2!1ses-419!2smx" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA BANNER ─────────────────────────────────────────────────────────────── -->
+<section class="cta-banner" id="reservar">
+  <div class="container" style="position:relative">
+    <div class="section-label" style="justify-content:center">Reservaciones</div>
+    <h2 class="cta-title">¿Listo para tu<br><em>viaje al palenque?</em></h2>
+    <p class="cta-sub">Contáctanos y reserva tu lugar en el tour más auténtico de Santiago Matatlán. Cupos limitados.</p>
+    <div class="cta-btns">
+      <a href="https://wa.me/521XXXXXXXXXX" class="btn-primary">📱 Reservar por WhatsApp</a>
+      <a href="https://www.tiktok.com" class="btn-secondary">🎵 Síguenos en TikTok</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────────────────────────────────────────── -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand-name"><span>3</span> Para el ES3</div>
+        <p class="footer-desc">Tours de mezcal artesanal en Santiago Matatlán, la Capital Mundial del Mezcal. Cuatro generaciones de productores artesanales te abren las puertas del palenque.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navegación</h4>
+        <ul>
+          <li><a href="#propuesta">Propuesta</a></li>
+          <li><a href="#recorrido">El Recorrido</a></li>
+          <li><a href="#precios">Precios</a></li>
+          <li><a href="#historia">Historia</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <ul>
+          <li><a href="#reservar">WhatsApp</a></li>
+          <li><a href="https://www.instagram.com/3paraeles3mezcal/" aria-label="Instagram pendiente">Instagram</a></li>
+          <li><a href="https://www.tiktok.com" target="_blank" rel="noopener">TikTok</a></li>
+          <li><a href="#" aria-label="Facebook pendiente">Facebook</a></li>
+          <li><a href="#" aria-label="YouTube pendiente">YouTube</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2025 3 Para el ES3 · Santiago Matatlán, Oaxaca, México</p>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/3paraeles3mezcal/" aria-label="Instagram pendiente">Instagram</a>
+        <a href="https://www.tiktok.com" target="_blank" rel="noopener">TikTok</a>
+        <a href="#" aria-label="Facebook pendiente">Facebook</a>
+        <a href="#" aria-label="YouTube pendiente">YouTube</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── Custom cursor ──────────────────────────────────────────────────────────────
+const cursor = document.getElementById('cursor');
+const ring   = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = mx + 'px';
+  cursor.style.top  = my + 'px';
+});
+
+function animateRing() {
+  rx += (mx - rx) * 0.15;
+  ry += (my - ry) * 0.15;
+  ring.style.left = rx + 'px';
+  ring.style.top  = ry + 'px';
+  requestAnimationFrame(animateRing);
+}
+animateRing();
+
+document.querySelectorAll('a, button, .pillar, .step, .frase-card, .campana').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cursor.style.width  = '20px';
+    cursor.style.height = '20px';
+    ring.style.width    = '60px';
+    ring.style.height   = '60px';
+    ring.style.opacity  = '0.3';
+  });
+  el.addEventListener('mouseleave', () => {
+    cursor.style.width  = '12px';
+    cursor.style.height = '12px';
+    ring.style.width    = '40px';
+    ring.style.height   = '40px';
+    ring.style.opacity  = '0.5';
+  });
+});
+
+// ── Nav scroll ─────────────────────────────────────────────────────────────────
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// ── Scroll reveal ──────────────────────────────────────────────────────────────
+const revealEls = document.querySelectorAll('.reveal');
+const observer  = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+revealEls.forEach(el => observer.observe(el));
+
+// ── Hero parallax ──────────────────────────────────────────────────────────────
+const heroTitle = document.querySelector('.hero-title');
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  if (heroTitle) heroTitle.style.transform = `translateY(${y * 0.3}px)`;
+});
+</script>
+</body>
+</html>
